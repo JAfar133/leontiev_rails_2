@@ -21,7 +21,7 @@ default: &default
 
 development:
   <<: *default
-  database: travel_social_network_development
+  database: networking_meeting_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -55,7 +55,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: travel_social_network_test
+  database: networking_meeting_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: travel_social_network_production
-  username: travel_social_network
-  password: <%= ENV["TRAVEL_SOCIAL_NETWORK_DATABASE_PASSWORD"] %>
+  database: networking_meeting_production
+  username: networking_meeting
+  password: <%= ENV["NETWORKING_MEETING_DATABASE_PASSWORD"] %>

@@ -1,10 +1,10 @@
 <!-- views/travel_places/_form.html.erb -->
-<%= form_with(model: travel_place, local: true, html: { class: 'form' }) do |form| %>
-  <% if travel_place.errors.any? %>
+<%= form_with(model: meeting, local: true, html: { class: 'form' }) do |form| %>
+  <% if meeting.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(travel_place.errors.count, "ошибка") %> заполнения формы:</h2>
+      <h2><%= pluralize(meeting.errors.count, "ошибка") %> form filling:</h2>
       <ul>
-        <% travel_place.errors.full_messages.each do |message| %>
+        <% meeting.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %></br>
-    <%= form.text_field :name %>
+    <%= form.label :title %></br>
+    <%= form.text_field :title %>
   </div>
 
   <div class="field">
@@ -27,6 +27,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit travel_place.persisted? ? 'Обновить' : 'Создать' %>
+    <%= form.submit meeting.persisted? ? 'Update' : 'Create' %>
   </div>
 <% end %>

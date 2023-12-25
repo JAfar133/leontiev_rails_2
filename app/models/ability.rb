@@ -7,9 +7,9 @@ class Ability
     user ||= User.new # гость (не авторизированный пользователь)
 
     if user.role == 'agent'
-      can :manage, TravelPlace
+      can :manage, Meeting
     else
-      can :read, TravelPlace
+      can :read, Meeting
     end
   end
 end

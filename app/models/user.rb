@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :travel_places, foreign_key: 'created_by'
+  has_many :meetings, foreign_key: 'created_by'
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
