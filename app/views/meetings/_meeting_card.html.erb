@@ -1,0 +1,30 @@
+<div class="travel-place card w-25">
+    <div class="card-header">
+    <h5 class="card-title"><%= meeting.title %></h5>
+    <% if user_signed_in? && current_user.organizator? %>
+        <%= link_to 'Edit', edit_meeting_path(meeting) %>
+    <% end %>
+    </div>
+    <div class="card-body">
+    
+    <p><strong>Location:</strong> <%= meeting.location %></p>
+    <p><strong>Description:</strong> <%= meeting.description %></p>
+    <p><strong>Entered by:</strong> <%= "#{meeting.created_by.last_name} #{meeting.created_by.first_name}" %></p>
+    <p><strong>Date:</strong> <%= meeting.datetime.strftime('%Y-%m-%d %H:%M') %></p>
+    <p><strong>Created at:</strong> <%= meeting.created_at.strftime('%Y-%m-%d %H:%M') %></p>
+    
+    </div>
+    <div class="card-footer">
+    <% if user_signed_in? 
+        if current_user.organizator? %>
+            <%= button_to 'Delete', meeting, method: :delete, class: 'btn btn-danger' %>
+        <% end %>
+        <% if current_user.user_meetings?(meeting) %>
+            <%= button_to 'Leave from meeting', join_to_meeting_meeting_path(meeting), method: :post, class: 'btn btn-warning' %>
+        <% else %>
+            <%= button_to 'Join to meeting', join_to_meeting_meeting_path(meeting), method: :post, class: 'btn btn-primary' %>
+        <% end %>
+    <% end %>
+    </div>
+</div>
+<hr>

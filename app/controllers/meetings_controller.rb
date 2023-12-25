@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :show, :index]
-  
+    before_action :authenticate_user!, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+    load_and_authorize_resource
+
     def index
       @meetings = Meeting.all
     end
@@ -33,6 +34,18 @@ class MeetingsController < ApplicationController
       end
     end
   
+    def join_to_meeting
+        @meeting = Meeting.find(params[:id])
+    
+        if current_user.user_meetings?(@meeting)
+          current_user.leave_from_meetings(@meeting)
+        else
+          current_user.join_to_meetings(@meeting)
+        end
+    
+        redirect_to meetings_path
+      end
+
     def destroy
       @meeting = Meeting.find(params[:id])
       @meeting.destroy
@@ -42,7 +55,7 @@ class MeetingsController < ApplicationController
     private
   
     def meeting_params
-      params.require(:meeting).permit(:location, :title, :date, :description)
+      params.require(:meeting).permit(:location, :title, :datetime, :description)
     end
   end
   

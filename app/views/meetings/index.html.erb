@@ -1,25 +1,19 @@
 <% if user_signed_in? %>
   <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
+  <%= link_to 'My meetings', meetings_user_path(current_user) %>
 <% end %>
 
 <h1>List of meetings</h1>
 
-<% if user_signed_in? %>
+<% if user_signed_in?  && current_user.organizator?%>
   <%= link_to 'Create new meeting', new_meeting_path %>
 <% end %>
-
-<% @meetings.each do |meeting| %>
-  <div class="travel-place">
-    <h3><%= meeting.title %></h3>
-    <p><strong>Location:</strong> <%= meeting.location %></p>
-    <p><strong>Descripion:</strong> <%= meeting.description %></p>
-    <p><strong>Created at:</strong> <%= meeting.created_at %></p>
-    <p><strong>Updated at:</strong> <%= meeting.updated_at %></p>
-
-    <% if user_signed_in? %>
-        <%= link_to 'Edit', edit_meeting_path(meeting) %>
-        <%= button_to  'Delete', meeting, method: :delete %>
-    <% end %>
-  </div>
-  <hr>
-<% end %>
+<div class="places">
+  <% if @meetings.present? %>
+    <% @meetings.each do |meeting| %>
+      <%= render 'meeting_card', meeting: meeting %>
+  <% end %>
+  <% else %>
+    <p>No meetings yet.</p>
+  <% end %>
+</div>
